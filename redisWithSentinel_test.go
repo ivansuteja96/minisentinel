@@ -5,9 +5,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/FZambia/sentinel"
 	"github.com/alicebob/miniredis/v2"
 	"github.com/gomodule/redigo/redis"
+	"github.com/ivansuteja96/sentinel"
 	"github.com/matryer/is"
 )
 
@@ -78,7 +78,8 @@ func TestRedisWithSentinel(t *testing.T) {
 			if time.Since(t) < time.Minute {
 				return nil
 			}
-			if !sentinel.TestRole(c, "master") {
+			expectedRole, _ := sentinel.TestRole(c, "master")
+			if !expectedRole {
 				return errors.New("Role check failed")
 			}
 			return nil

@@ -70,7 +70,7 @@ func (s *Sentinel) Replica() *miniredis.Miniredis {
 
 // Run creates and Start()s a Sentinel.
 func Run(master *miniredis.Miniredis, opts ...Option) (*Sentinel, error) {
-	s := NewSentinel(master)
+	s := NewSentinel(master, opts...)
 	return s, s.Start()
 }
 
